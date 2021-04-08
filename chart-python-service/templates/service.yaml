@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.serviceName }}{{- if .Values.branchName }}-{{ .Values.branchName }}{{- end }}"
+  labels:
+    app: "{{ .Values.serviceName }}"
+    {{- if .Values.branchName }}
+    version: {{ .Values.branchName }}
+    {{- else }}
+    version: default
+    {{- end }}
+spec:
+  type: {{ default "ClusterIP" .Values.service.type | quote }}
+
+  ports:
+  {{- range $key, $port := .Values.service.ports }}
+  - name: "{{ $key }}"
+    port: {{ $port }}
+    targetPort: {{ $port }}
+  {{- end }}
+  {{- if ne .Values.service.targetPort .Values.service.defaultTargetPort }}
+  - name: "http-9000"
+    port: 9000
+    targetPort: {{ .Values.service.targetPort }}
+  {{- end }}
+  selector:
+    app: "{{ template "serviceName" . }}"
+    {{- if .Values.branchName }}
+    version: {{ .Values.branchName }}
+    {{- end }}
+{{- end }}
+

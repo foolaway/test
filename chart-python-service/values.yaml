@@ -1,0 +1,26 @@
+serviceName: ""
+replicas: 1
+image:
+  repository: ""
+  pullPolicy: "IfNotPresent"
+  pullSecrets: ""
+service:
+  export: true
+  type: "ClusterIP"
+  probeScheme: "HTTPS"
+#   port: 0
+  targetPort: 9000
+# resources:
+#   requests:
+#     cpu: 50m
+#     memory: 100Mi
+#   limits:
+#     cpu: 1000m
+#     memory: 1000Mi
+labels:
+  app: ""
+envs: 
+  CLUSTER: "kubernetes"  
+# configMapMounts:
+#   - XXX: XXX
+grpcProxy: false
