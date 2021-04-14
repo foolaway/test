@@ -1,7 +1,9 @@
-serviceName: ""
+serviceName: "spec"
+deploymentName: "spec"
 replicas: 1
+command: "bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"
 image:
-  repository: ""
+  repository: "registry.cn-shenzhen.aliyuncs.com/yolanda/spec"
   pullPolicy: "IfNotPresent"
   pullSecrets: ""
 service:
@@ -18,9 +20,23 @@ resources:
     cpu: 1000m
     memory: 1000Mi
 labels:
-  app: ""
+  app: "spec"
 envs: 
-  CLUSTER: "kubernetes"  
+  - CLUSTER: "kubernetes"  
+  - DATABASE_HOST: 120.25.63.164
+  - DATABASE_NAME: yolanda_spec_sit
+  - DATABASE_PASSWORD: Qm1yp7z0!g^v5hn
+  - DATABASE_PORT: "37101"
+  - DATABASE_USERNAME: spec_sit
+  - RACK_ENV: production
+  - RAILS_ENV: production
+  - RAILS_MAX_THREADS: "5"
+  - REDIS_DB: "13"
+  - REDIS_HOST: 10.31.77.110
+  - REDIS_NAMESPACE: spec_sit
+  - REDIS_PASSWORD: 8Eh5dO9tHnOfI0YolandaRedis
+  - REDIS_PORT: "26521"
+  - REDIS_USER: "username"
 # configMapMounts:
 #   - XXX: XXX
 grpcProxy: false
