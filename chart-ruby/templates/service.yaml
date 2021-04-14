@@ -2,10 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: "{{ .Values.serviceName }}"
+  creationTimestamp: {{ .Values.timestamp }}
   labels:
     app: "{{ .Values.serviceName }}"
     version: default
-spec:
+{{ .Values.serviceName }}:
   type: {{ default "ClusterIP" .Values.service.type | quote }}
   ports:
   {{- range $key, $port := .Values.service.ports }}

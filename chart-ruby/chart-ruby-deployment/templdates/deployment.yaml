@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: "{{ .Values.deploymentName }}"
-spec:
+{{ .Values.deploymentName }}:
   replicas: {{ default 1 .Values.replicas }}
   strategy:
     rollingUpdate:
@@ -11,11 +11,12 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: {{ .Values.timestamp }}
       labels:
         {{- range $key, $val := .Values.labels }}
         {{ $key }}: "{{ $val }}"
         {{- end }}
-    spec:
+    {{ .Values.deploymentName }}:
       initContainers:
         - name: migrate-db
           image: "{{.Values.image.repository}}"

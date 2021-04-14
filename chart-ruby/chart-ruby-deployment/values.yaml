@@ -1,7 +1,10 @@
+#Default values for ruby-deployment
+#
 serviceName: ""
 replicas: 1
 image:
-  repository: ""
+  repository: registry.cn-shenzhen.aliyuncs.com/yolanda/spec
+  tag: sit-1
   pullPolicy: "IfNotPresent"
   pullSecrets: ""
 service:
@@ -9,16 +12,16 @@ service:
   type: "ClusterIP"
   probeScheme: "HTTPS"
 #   port: 0
-  targetPort: 9000
+#   targetPort: 0
 resources:
   requests:
     cpu: 50m
     memory: 100Mi
   limits:
     cpu: 1000m
-    memory: 1000Mi
+    memory: 2000Mi
 labels:
-  app: ""
+  app: "spec"
 envs: 
   CLUSTER: "kubernetes"  
 # configMapMounts:
