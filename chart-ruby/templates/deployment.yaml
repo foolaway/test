@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: "{{ .Values.deploymentName }}"
-spec:
+{{ .Values.deploymentName }}:
   replicas: {{ default 1 .Values.replicas }}
   strategy:
     rollingUpdate:
@@ -11,17 +11,19 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: {{ .Values.timestamp }}
       labels:
         {{- range $key, $val := .Values.labels }}
         {{ $key }}: "{{ $val }}"
         {{- end }}
-    spec:
+    {{ .Values.deploymentName }}:
       initContainers:
         - name: migrate-db
           image: "{{.Values.image.repository}}"
-          command: ["bin/entry bundle exec rails s -p 3001 -b 0.0.0.0"]
+         # command: ["bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"]
+          command: [{{ .Values.command }}]
       containers:
-        - name: "{{ template "serviceName" . }}"
+        - name: "{{ template "deploymentName" . }}"
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           ports:
