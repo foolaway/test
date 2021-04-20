@@ -5,7 +5,6 @@ metadata:
   labels:
     app: "{{ .Values.serviceName }}"
 spec:
-  type: ClusterIP
   ports:
   {{- range $key, $port := .Values.service.ports }}
   - name: "{{ $key }}"
