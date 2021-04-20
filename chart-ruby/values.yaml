@@ -10,7 +10,8 @@ service:
   export: true
   type: "ClusterIP"
   probeScheme: "HTTPS"
-  # port: 0
+  ports:
+    http: 9000
   # targetPort: 9000
 resources:
   requests:
