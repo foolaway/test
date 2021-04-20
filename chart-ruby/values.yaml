@@ -3,7 +3,7 @@ deploymentName: "spec"
 replicas: 1
 command: "bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"
 image:
-  repository: "registry.cn-shenzhen.aliyuncs.com/yolanda/spec"
+  repository: "registry.cn-shenzhen.aliyuncs.com/yolanda/spec:sit-1"
   pullPolicy: "IfNotPresent"
   pullSecrets: ""
 service:
