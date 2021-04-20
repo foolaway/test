@@ -1,5 +1,5 @@
-serviceName: "spec-test"
-deploymentName: "spec1-test"
+serviceName: "spec-test1"
+deploymentName: "spec1-test1"
 replicas: 1
 command: "bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"
 image:
@@ -21,7 +21,7 @@ resources:
     cpu: 1000m
     memory: 1000Mi
 labels:
-  app: "spec-test"
+  app: "spec-test1"
 envs: 
   xxx: "xxx"
 # configMapMounts:
