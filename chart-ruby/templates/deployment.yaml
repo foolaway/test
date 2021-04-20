@@ -9,7 +9,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: "spec-test1"
+      app: "spec-test3"
   replicas: {{ default 1 .Values.replicas }}
   strategy:
     rollingUpdate:
