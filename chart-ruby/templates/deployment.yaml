@@ -25,7 +25,7 @@ spec:
          # command: ["bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"]
           command: [{{ .Values.command }}]
       containers:
-        - name: "{{ template "deploymentName" . }}"
+        - name: "{{ .Values.deploymentName }}"
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           ports:
