@@ -2,10 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "{{ .Values.deploymentName }}"
+  labels:
+    {{- range $key, $val := .Values.labels }}
+    {{ $key }}: "{{ $val }}"
+    {{- end }}
 spec:
   selector:
     matchLabels:
-      app: "spec-test"
+      app: "spec-test1"
   replicas: {{ default 1 .Values.replicas }}
   strategy:
     rollingUpdate:
