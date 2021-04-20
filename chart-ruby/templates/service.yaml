@@ -14,11 +14,9 @@ metadata:
     port: {{ $port }}
     targetPort: {{ $port }}
   {{- end }}
-  {{- if ne .Values.service.targetPort .Values.service.defaultTargetPort }}
   - name: "http-9000"
     port: 9000
     targetPort: {{ .Values.service.targetPort }}
-  {{- end }}
   selector:
     app: "{{ template "serviceName" . }}"
 
