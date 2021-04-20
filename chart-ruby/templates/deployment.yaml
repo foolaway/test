@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: "spec"
+      app: "spec-test"
   replicas: {{ default 1 .Values.replicas }}
   strategy:
     rollingUpdate:
