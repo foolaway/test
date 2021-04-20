@@ -11,7 +11,7 @@ service:
   type: "ClusterIP"
   probeScheme: "HTTPS"
   ports:
-    http: 9000
+    http: 9001
   # targetPort: 9000
 resources:
   requests:
