@@ -22,7 +22,7 @@ resources:
 labels:
   app: "spec"
 envs: 
-
+  xxx: "xxx"
 # configMapMounts:
 #   - XXX: XXX
 grpcProxy: false
