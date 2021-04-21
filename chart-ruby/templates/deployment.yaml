@@ -28,6 +28,11 @@ spec:
           image: "{{.Values.image.repository}}"
          # command: ["bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"]
           command: [{{ .Values.command }}]
+          env:
+            {{- range $key, $val := .Values.envs }}
+            - name: "{{ $key }}"
+              value: "{{ $val }}"
+            {{- end }}
       containers:
         - name: "{{ .Values.deploymentName }}"
           image: "{{.Values.image.repository}}"
