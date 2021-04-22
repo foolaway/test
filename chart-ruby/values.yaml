@@ -30,13 +30,13 @@ envs:
 grpcProxy: false
 
 ingress:
-  enabled: false
-  certManager: false
+  enabled: true
+  host: xxx
+  backend: xxx
+  backendPort: 3005
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
-  - name: xxx
-    path: /
     tls: false
     tlsSecret: xxx
   secrets:
