@@ -30,7 +30,7 @@ envs:
 grpcProxy: false
 
 ingress:
-  enabled: true
+  enabled: false
   host: xxx
   backend: xxx
   backendPort: 3005
