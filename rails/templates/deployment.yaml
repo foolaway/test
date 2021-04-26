@@ -27,7 +27,7 @@ spec:
         - name: migrate-db
           image: "{{.Values.image.repository}}"
          # command: ["bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"]
-          command: bin/migrate
+          command: ["bin/migrate"]
           env:
             {{- range $key, $val := .Values.envs }}
             - name: "{{ $key }}"
