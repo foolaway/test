@@ -24,10 +24,10 @@ spec:
         {{- end }}
     spec:
       initContainers:
-        - name: migrate-db
+        - name: init-application
           image: "{{.Values.image.repository}}"
          # command: ["bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"]
-          command: ["bin/migrate"]
+          command: ["bin/init"]
           env:
             {{- range $key, $val := .Values.envs }}
             - name: "{{ $key }}"
