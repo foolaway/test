@@ -32,9 +32,16 @@ spec:
             - containerPort: {{ .Values.service.ports.http }}
           {{- if .Values.envs }}
           env:
+            # {{- range $key, $val := .Values.envs }}
+            # - name: "{{ $key }}"
+            #   value: "{{ $val }}"
+            # {{- end }}
             {{- range $key, $val := .Values.envs }}
-            - name: "{{ $key }}"
-              value: "{{ $val }}"
+            - name: {{ $key }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.deploymentName }}
+                key: {{ $val }}
             {{- end }}
           {{- end }}
           resources:
