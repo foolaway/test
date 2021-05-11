@@ -30,20 +30,11 @@ spec:
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           ports:
             - containerPort: {{ .Values.service.ports.http }}
-          {{- if .Values.envs }}
           env:
-            # {{- range $key, $val := .Values.envs }}
-            # - name: "{{ $key }}"
-            #   value: "{{ $val }}"
-            # {{- end }}
             {{- range $key, $val := .Values.envs }}
-            - name: {{ $key }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.deploymentName }}
-                key: {{ $val }}
+            - name: "{{ $key }}"
+              value: "{{ $val }}"
             {{- end }}
-          {{- end }}
           resources:
             requests:
               cpu: "{{.Values.resources.requests.cpu}}"
