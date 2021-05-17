@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.deploymentName }}"
+  labels:
+    {{- range $key, $val := .Values.labels }}
+    {{ $key }}: "{{ $val }}"
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.labels.app }}
+  replicas: {{ default 1 .Values.replicas }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- range $key, $val := .Values.labels }}
+        {{ $key }}: "{{ $val }}"
+        {{- end }}
+    spec:
+      containers:
+        - name: "{{ .Values.deploymentName }}"
+          command: {{ .Values.command }}
+          image: "{{.Values.image.repository}}"
+          imagePullPolicy: "{{.Values.image.pullPolicy}}"
+          ports:
+            - containerPort: {{ .Values.service.ports.http }}
+          env:
+          {{- range $key, $val := .Values.envs }}
+          - name: "{{ $key }}"
+            value: "{{ $val }}"
+          {{- end }}
+          resources:
+            requests:
+              cpu: "{{.Values.resources.requests.cpu}}"
+              memory: "{{.Values.resources.requests.memory}}"
+            limits:
+              cpu: "{{.Values.resources.limits.cpu}}"
+              memory: "{{.Values.resources.limits.memory}}"
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- range $key, $val := .Values.image.pullSecrets }}
+        - name: "{{ $val }}"
+        {{- end }}
+      {{- end }}

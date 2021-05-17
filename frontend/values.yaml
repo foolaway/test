@@ -1,0 +1,41 @@
+serviceName: "frontend"
+deploymentName: "frontend"
+replicas: 1
+image:
+  repository: "registry.cn-shenzhen.aliyuncs.com/yolanda/yoga-web:sit"
+  pullPolicy: "IfNotPresent"
+  pullSecrets: ""
+service:
+  export: true
+  type: ClusterIP
+  probeScheme: "HTTPS"
+  ports:
+    http: 9001
+  targetPort: 9000
+  # targetPort: 9000
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  limits:
+    cpu: 1000m
+    memory: 1000Mi
+labels:
+  app: "frontend"
+envs: 
+  xxx: "xxx"
+# configMapMounts:
+#   - XXX: XXX
+grpcProxy: false
+
+ingress:
+  enabled: true
+  host: sit-yoga.yolanda.hk
+  backend: yoga-web
+  backendPort: 8000
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    tls: false
+    tlsSecret: xxx
+  secrets:
