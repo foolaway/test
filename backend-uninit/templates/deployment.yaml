@@ -29,7 +29,7 @@ spec:
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           ports:
-            - containerPort: {{ .Values.service.ports.http }}
+            - containerPort: {{ .Values.service.targetPort }}
           env:
             {{- range $key, $val := .Values.envs }}
             - name: "{{ $key }}"
