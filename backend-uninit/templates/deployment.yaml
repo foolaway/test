@@ -25,16 +25,16 @@ spec:
     spec:
       containers:
         - name: "{{ .Values.deploymentName }}"
-          # command: {{ .Values.command }}
+          command: {{ .Values.command }}
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           ports:
-            - containerPort: {{ .Values.service.targetPort }}
+            - containerPort: {{ .Values.service.ports.http }}
           env:
-          {{- range $key, $val := .Values.envs }}
-          - name: "{{ $key }}"
-            value: "{{ $val }}"
-          {{- end }}
+            {{- range $key, $val := .Values.envs }}
+            - name: "{{ $key }}"
+              value: "{{ $val }}"
+            {{- end }}
           resources:
             requests:
               cpu: "{{.Values.resources.requests.cpu}}"
