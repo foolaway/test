@@ -31,10 +31,10 @@ spec:
           ports:
             - containerPort: {{ .Values.service.ports.http }}
           env:
-            {{- range $key, $val := .Values.envs }}
-            - name: "{{ $key }}"
-              value: "{{ $val }}"
-            {{- end }}
+          {{- range $key, $val := .Values.envs }}
+          - name: "{{ $key }}"
+            value: "{{ $val }}"
+          {{- end }}
           resources:
             requests:
               cpu: "{{.Values.resources.requests.cpu}}"

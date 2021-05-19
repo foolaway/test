@@ -6,13 +6,8 @@ metadata:
     app: "{{ .Values.serviceName }}"
 spec:
   ports:
-  {{- range $key, $port := .Values.service.ports }}
-  - name: "{{ $key }}"
-    port: {{ $port }}
-    targetPort: {{ $port }}
-  {{- end }}
-  - name: "http-9000"
-    port: 9000
+  - name: "http-10000"
+    port: 10000
     targetPort: {{ .Values.service.targetPort }}
   selector:
     app: "{{ .Values.serviceName }}"

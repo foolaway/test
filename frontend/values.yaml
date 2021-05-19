@@ -9,8 +9,6 @@ service:
   export: true
   type: ClusterIP
   probeScheme: "HTTPS"
-  ports:
-    http: 9001
   targetPort: 9000
   # targetPort: 9000
 resources:
@@ -32,7 +30,7 @@ ingress:
   enabled: true
   host: sit-yoga.yolanda.hk
   backend: yoga-web
-  backendPort: 8000
+  backendPort: 10000
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
