@@ -13,5 +13,5 @@ spec:
       - path: /
         backend:
           serviceName: "{{ .Values.ingress.backend }}"
-          servicePort: 10000
+          servicePort: 9000
 {{- end -}}
