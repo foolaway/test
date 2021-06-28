@@ -25,7 +25,6 @@ spec:
     spec:
       containers:
         - name: "{{ .Values.deploymentName }}"
-          command: {{ .Values.command }}
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           ports:
