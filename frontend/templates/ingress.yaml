@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: "{{ .Values.serviceName }}"
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: "kong"
 spec:
   rules:
   - host: "{{ .Values.ingress.host }}"
