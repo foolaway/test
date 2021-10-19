@@ -39,3 +39,15 @@ ingress:
     tls: false
     tlsSecret: xxx
   secrets:
+
+inner-ingress:
+  enabled: false
+  host: xxx
+  backend: xxx
+  backendPort: 3005
+  annotations:
+    kubernetes.io/ingress.class: kong
+  hosts:
+    tls: false
+    tlsSecret: xxx
+  secrets:
