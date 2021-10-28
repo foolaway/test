@@ -1,0 +1,18 @@
+{{- if .Values.iningress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "{{ .Values.serviceName }}"
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+    konghq.com/strip-path: "true"
+spec:
+  rules:
+  - host: "{{ .Values.iningress.host }}"
+    http:
+      paths:
+      - path: /{{ .Values.serviceName }}
+        backend:
+          serviceName: "{{ .Values.ingress.backend }}"
+          servicePort: 10000
+{{- end -}}

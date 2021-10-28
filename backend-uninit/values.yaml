@@ -40,3 +40,11 @@ ingress:
     tlsSecret: xxx
   secrets:
 
+iningress:
+  enabled: false
+  host: gateway-inner.yolanda.hk
+  path: /yoga-web
+  backend: yoga-web
+  backendPort: 10000
+  annotations: 
+    kubernetes.io/ingress.class: kong
