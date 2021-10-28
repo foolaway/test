@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: "{{ .Values.serviceName }}"
+  name: "{{ .Values.serviceName }}"-inner
   annotations:
     kubernetes.io/ingress.class: "kong"
     konghq.com/strip-path: "true"
