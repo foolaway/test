@@ -19,7 +19,7 @@ resources:
     memory: 100Mi
   limits:
     cpu: 1000m
-    memory: 1000Mi
+    memory: 2048Mi
 labels:
   app: "spec-test3"
 envs: 
