@@ -1,0 +1,17 @@
+{{- if .Values.nodePort.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.serviceName }}-nodeport
+  labels:
+    app: "{{ .Values.serviceName }}"
+spec:
+  ports:
+  - name: "nodeport"
+    port: 10000
+    nodePort: {{ .Values.nodePort.port }}
+    targetPort: {{ .Values.service.targetPort }}
+  selector:
+    app: "{{ .Values.serviceName }}"
+  type: NodePort
+{{- end -}}

@@ -28,8 +28,18 @@ spec:
           command: {{ .Values.command }}
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            tcpSocket:
+              port: {{ .Values.service.targetPort }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            tcpSocket:
+              port: {{ .Values.service.targetPort }}
           env:
           {{- range $key, $val := .Values.envs }}
           - name: "{{ $key }}"

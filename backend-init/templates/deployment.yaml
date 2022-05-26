@@ -37,8 +37,18 @@ spec:
         - name: "{{ .Values.deploymentName }}"
           image: "{{.Values.image.repository}}"
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            tcpSocket:
+              port: {{ .Values.service.targetPort }}
           ports:
             - containerPort: {{ .Values.service.ports.http }}
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            tcpSocket:
+              port: {{ .Values.service.targetPort }}
           {{- if .Values.envs }}
           env:
             {{- range $key, $val := .Values.envs }}
