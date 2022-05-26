@@ -48,3 +48,7 @@ iningress:
   backendPort: 10000
   annotations: 
     kubernetes.io/ingress.class: kong
+
+nodePort:
+  enabled: false
+  port: 8000
