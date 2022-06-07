@@ -44,13 +44,6 @@ spec:
             - name: "{{ $key }}"
               value: "{{ $val }}"
             {{- end }}
-          resources:
-            requests:
-              cpu: "{{.Values.resources.requests.cpu}}"
-              memory: "{{.Values.resources.requests.memory}}"
-            limits:
-              cpu: "{{.Values.resources.limits.cpu}}"
-              memory: "{{.Values.resources.limits.memory}}"
       {{- if .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- range $key, $val := .Values.image.pullSecrets }}
