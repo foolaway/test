@@ -26,6 +26,12 @@ spec:
       containers:
         - name: "{{ .Values.deploymentName }}"
           image: "{{.Values.image.repository}}"
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - sleep
+                - 20s
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
           livenessProbe:
             initialDelaySeconds: 30
