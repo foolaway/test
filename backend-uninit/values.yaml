@@ -48,3 +48,15 @@ iningress:
   backendPort: 10000
   annotations: 
     kubernetes.io/ingress.class: kong
+
+crons:
+  "0":
+    name: my-first-cron
+    repository: nginx    
+    command: my:first:cron
+    schedule: "*/10 * * * *"
+  "1":
+    name: my-second-cron
+    command: my:second:cron
+    repository: nginx
+    schedule: "*/3 * * * *"
