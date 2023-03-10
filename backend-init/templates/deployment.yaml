@@ -26,6 +26,12 @@ spec:
       initContainers:
         - name: init-application
           image: "{{.Values.image.repository}}"
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - sleep
+                - 20s
          # command: ["bin/entry bundle exec rails s -p 3005 -b 0.0.0.0"]
           command: ["bin/init"]
           env:
@@ -56,13 +62,6 @@ spec:
               value: "{{ $val }}"
             {{- end }}
           {{- end }}
-          resources:
-            requests:
-              cpu: "{{.Values.resources.requests.cpu}}"
-              memory: "{{.Values.resources.requests.memory}}"
-            limits:
-              cpu: "{{.Values.resources.limits.cpu}}"
-              memory: "{{.Values.resources.limits.memory}}"
       {{- if .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- range $key, $val := .Values.image.pullSecrets }}
