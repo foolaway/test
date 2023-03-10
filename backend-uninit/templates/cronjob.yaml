@@ -1,0 +1,30 @@
+{{- range $job, $val := .Values.crons }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .name }}
+spec:
+  schedule: {{ .schedule | quote }}
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: {{ .name }}
+        spec:       
+          containers:
+          - name: {{ .name }}
+            image: {{ .repository }}
+            command: {{ .command }}
+            ports:
+            - containerPort: 80
+            env:
+              {{- range $key, $val := .envs }}
+              - name: "{{ $key }}"
+                value: "{{ $val }}"
+              {{- end }}
+          restartPolicy: Never
+---
+{{- end}}
